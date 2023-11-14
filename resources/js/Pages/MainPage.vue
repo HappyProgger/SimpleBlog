@@ -2,7 +2,7 @@
 
 import Navbar from '@/Components/Navbar.vue';
 import Footer from "@/Components/Footer.vue";
-import BlogSection from "@/Components/Arcticles/BlogSection.vue";
+import BlogSection from "@/Components/Arcticles/BlogSectionForMainPage.vue";
 
 export default {
 
@@ -10,10 +10,19 @@ export default {
     components: {
         Navbar: Navbar,
         Footer: Footer,
-        BlogSection: BlogSection
+        BlogSection: BlogSection,
+        article: Array
     },
-    data() {
-        return []
+    data(){
+        return {
+
+            articles: this.$inertia.page.props.articles
+        }
+    },
+    methods:{
+        convert_date($row_date){
+            return new Date($row_date).toISOString().replace('T', ' ').slice(0, -5)
+        }
     }
 
 
@@ -21,9 +30,7 @@ export default {
 </script>
 
 <template>
-
-    <Navbar></Navbar>
-
+       <Navbar></Navbar>
     <div class="bg-[#64748b] w-full h-60 flex ">
         <div class="justify-center align-center self-center ml-20">
             <div class="xl,lg:text-[70px] md:text-[60px] font-bold">Успех</div>
@@ -38,16 +45,25 @@ export default {
                             class="focus:outline-none text-center text-3xl lg:text-5xl tracking-wider text-gray-900">Latest from our Blog</h1>
                     </span>
             <div tabindex="0" aria-label="Group of cards" class="focus:outline-none mt-12 lg:mt-24">
-                <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-8">
+                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
 
-                    <div>
-                        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
 
-                            <BlogSection></BlogSection>
-                            <BlogSection></BlogSection>
-                            <BlogSection></BlogSection>
+                        <div  class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-8 flex"
+                            v-for="article in this.articles ">
 
-                        </div>
+
+                            <BlogSection
+                            :date="convert_date(article.created_at)"
+                            :src_img="article.image"
+                            :title="article.title"
+                            :short_description="article.text.slice(0,100)+ '...'"
+                            :counter_views="article.counter_views"
+                            :counter_likes="article.counter_likes">
+
+                            </BlogSection>
+
+
+
 
 
 

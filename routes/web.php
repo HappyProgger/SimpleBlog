@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArcticleController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\ProfileController;
 
@@ -18,8 +19,8 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [MainPageController::class,'index']);
-Route::get('/articles', [ArcticleController::class,'index']);
-Route::get('/articles/{slug}', [ArcticleController::class,'show']);
+Route::get('/articles', [ArticleController::class,'index']);
+Route::get('/articles/{slug}', [ArticleController::class,'show']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

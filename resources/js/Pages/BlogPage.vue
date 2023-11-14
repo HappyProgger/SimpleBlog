@@ -1,93 +1,197 @@
 <script>
+
+
+import BlogSectionForBlogsPage from "@/Components/Arcticles/BlogSectionForBlogsPage.vue";
 import Navbar from "@/Components/Navbar.vue";
+import Pagination from "@/Components/Pagination.vue";
 import Footer from "@/Components/Footer.vue";
-import BlogContent from "@/Components/Arcticles/BlogContent.vue";
+import Categories from "@/Components/Arcticles/Categories.vue";
+import BlogComment from "@/Components/BlogComment.vue";
 
 export default {
-    name: "BlogPage",
-    components: {
-        Navbar: Navbar,
-        Footer: Footer,
-        BlogContent: BlogContent
+    name: "BlogSection",
+    components: {Footer, Pagination, Navbar, BlogSectionForBlogsPage, Categories, BlogComment},
+    props: {
+        // src_img : String,
+        // title: String,
+        // short_description: String,
+        // date: String,
+        // counter_likes: Number,
+        // counter_views: Number,
+
     },
+
+    data() {
+        return {
+            article: this.$inertia.page.props.article,
+            tags: this.$inertia.page.props.tags
+        }
+    },
+
+    methods: {
+
+    },
+
+
 }
 </script>
 
 <template>
-
     <Navbar></Navbar>
-    <section id="content" class="prose lg:prose-2xl container mx-auto font-sans px-4 py-2 my-2">
-        <article>
-            <header class="w-full mx-auto">
-                <p class="flex items-center"><a href="/" ><button class="text-orange-800 text-xl"><i class="fa-solid fa-chevron-left text-md"></i> <span class="underline">Back to Blog</span></button></a></p>
-                Friday, <time pubdate datetime="2022-10-14" title="August 28th, 2011">October 14th, 2022</time>
-                <h1 style="margin-bottom: 0;">Washington Has Ridiciously Large Pumpkins</h1>
-            </header>
-            <footer class="w-full mx-auto">
-                <div style="height: 1.5em; margin: 2em 0 2.5em 0" class="flex items-center">
-                    <img alt="Riley Egge depicated with a large curley black mustache" height="60" width="60" class="rounded-full flex mr-1.5 border-orange-500" src="https://avatars.dicebear.com/api/open-peeps/rileyiscoolasddasff.svg">
-                    <div class="flex items-center">
-                        <address class="author">By <a rel="author" class="url fn n" href="/author/john-doe">Riley Egge</a></address>
-                    </div>
-                    <div class="flex flex-1 justify-end items-center">
-                        <div class="mx-4">
-                            <a aria-label="Accessibility help" href="#" class="no-underline px-2 py-1 bg-orange-800 hover:bg-orange-900 text-gray-100 rounded text-sm md:text-base">Accessibility</a>
-                        </div>
+    <div class="bg-gray-100 overflow-x-hidden">
+
+
+        <div class="px-6 py-8">
+            <div class="flex justify-between container mx-auto">
+                <div class="w-full lg:w-8/12">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Post</h1>
                         <div>
-                            <a aria-label="Share this article" href="#">
-                                <i class="fa-solid fa-share-from-square text-2-xl"></i>
-                            </a>
+                            <select
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option>Latest</option>
+                                <option>Last Week</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                    </div>
+                    <div class="mt-6">
+                        <img tabindex="0" id="article_img" role="img" aria-label="gaming"
+                             class="focus:outline-none w-full"
+                             alt="blog_image"
+                             src="https://mountain.nsu.ru/nas_tour/Altay2016.05/photos/hi-res/IMG_33857.JPG"/>
+                        <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
+                            <div class="mt-2"><a href="#" class="text-2xl text-gray-700 font-bold hover:underline">{{
+                                    this.article.title
+                                }}</a>
+                                <p class="mt-2 text-gray-600">{{ this.article.text }}</p>
+                            </div>
+                            <div class="flex justify-end items-center mt-4">
+
+                                <div><a href="#" class="flex items-center"><img
+                                    src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
+                                    alt="avatar" class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block">
+                                    <h1 class="text-gray-700 font-bold hover:underline">Alex John</h1>
+                                </a></div>
+                            </div>
+                            <div class="flex sm:justify-start  ">
+                                <div class="flex ">
+                                    <button class="w-[40px] h-[40px] self-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             x="0px" y="0px" viewBox="0 0 600 600"
+                                             style="enable-background:new 0 0 490 490;" xml:space="preserve"><g><path d="M245.204,101.267C67.171,101.267,0,245,0,245s66.763,143.733,244.796,143.733C422.829,388.733,490,245,490,245 S423.238,101.267,245.204,101.267z M244.796,373.421c-146.393,0-212.367-101.053-227.506-128.333 c15.249-26.796,82.733-128.508,227.914-128.508c146.514,0,212.475,101.22,227.543,128.4 C457.578,272.203,391.313,373.421,244.796,373.421z"/><path
+                                            d="M245.003,146.124c-54.521,0-98.881,44.352-98.881,98.873c0,54.521,44.36,98.881,98.881,98.881s98.873-44.36,98.873-98.881 C343.876,190.477,299.524,146.124,245.003,146.124z M245.003,328.566c-46.08,0-83.568-37.489-83.568-83.568 c0-46.072,37.489-83.561,83.568-83.561c46.072,0,83.561,37.489,83.561,83.561C328.564,291.077,291.075,328.566,245.003,328.566z"/><path
+                                            d="M245.003,175.583c-38.281,0-69.422,31.141-69.422,69.415c0,38.274,31.141,69.415,69.422,69.415 c38.274,0,69.415-31.141,69.415-69.415C314.417,206.724,283.277,175.583,245.003,175.583z M245.003,299.1 c-29.833,0-54.11-24.27-54.11-54.102c0-29.832,24.277-54.102,54.11-54.102s54.102,24.27,54.102,54.102 C299.105,274.83,274.835,299.1,245.003,299.1z"/><path
+                                            d="M245.003,206.679c-21.13,0-38.326,17.189-38.326,38.319c0,21.129,17.197,38.326,38.326,38.326s38.319-17.197,38.319-38.326 C283.321,223.868,266.132,206.679,245.003,206.679z M245.003,268.011c-12.688,0-23.014-10.326-23.014-23.014 c0-12.688,10.325-23.006,23.014-23.006c12.688,0,23.006,10.318,23.006,23.006C268.009,257.686,257.691,268.011,245.003,268.011z"/></g></svg>
+                                    </button>
+                                    <h1 class="mt-1.5">{{ this.article.counter_views }}</h1>
+                                </div>
+
+                                <div class="flex ml-4 ">
+
+                                    <button class="w-[40px] h-[40px] mb-0 flex  ">
+                                        <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                                            <g id="Layer_40" data-name="Layer 40">
+                                                <path
+                                                    d="m82.815 32.255h-25.1v-18.721a6.757 6.757 0 0 0 -12.552-3.477l-17.5 29.169h-22.663a2 2 0 0 0 -2 2v50a2 2 0 0 0 2 2h66.942a14.158 14.158 0 0 0 13.449-9.693l10.873-32.619a14.177 14.177 0 0 0 -13.449-18.659zm-56.015 56.969h-10.41a2.011 2.011 0 0 0 .047-.421v-45.577h10.363zm-19.8-45.998h5.437v45.574a2.011 2.011 0 0 0 .046.421h-5.483zm85.469 6.423-10.869 32.618a10.163 10.163 0 0 1 -9.654 6.957h-41.146v-47.444l17.8-29.666a2.758 2.758 0 0 1 5.122 1.42v20.721a2 2 0 0 0 2 2h27.1a10.176 10.176 0 0 1 9.654 13.394z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <h1 class="mt-1.5 mr-2">{{ this.article.counter_views }}</h1>
+                                </div>
+                            </div>
+
+
+
+                            <BlogComment></BlogComment>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="-mx-8 w-4/12 hidden lg:block">
+                    <div class="px-8">
+                        <h1 class="mb-4 text-xl font-bold text-gray-700">Authors</h1>
+                        <div class="flex flex-col bg-white max-w-sm px-6 py-4 mx-auto rounded-lg shadow-md">
+                            <ul class="-mx-4">
+                                <li class="flex items-center"><img
+                                    src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
+                                    alt="avatar" class="w-10 h-10 object-cover rounded-full mx-4">
+                                    <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Alex
+                                        John</a><span
+                                        class="text-gray-700 text-sm font-light">Created 23 Posts</span></p>
+                                </li>
+                                <li class="flex items-center mt-6"><img
+                                    src="https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=333&amp;q=80"
+                                    alt="avatar" class="w-10 h-10 object-cover rounded-full mx-4">
+                                    <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Jane
+                                        Doe</a><span
+                                        class="text-gray-700 text-sm font-light">Created 52 Posts</span></p>
+                                </li>
+                                <li class="flex items-center mt-6"><img
+                                    src="https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=281&amp;q=80"
+                                    alt="avatar" class="w-10 h-10 object-cover rounded-full mx-4">
+                                    <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Lisa
+                                        Way</a><span
+                                        class="text-gray-700 text-sm font-light">Created 73 Posts</span></p>
+                                </li>
+                                <li class="flex items-center mt-6"><img
+                                    src="https://images.unsplash.com/photo-1500757810556-5d600d9b737d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=735&amp;q=80"
+                                    alt="avatar" class="w-10 h-10 object-cover rounded-full mx-4">
+                                    <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Steve
+                                        Matt</a><span
+                                        class="text-gray-700 text-sm font-light">Created 245 Posts</span></p>
+                                </li>
+                                <li class="flex items-center mt-6"><img
+                                    src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=373&amp;q=80"
+                                    alt="avatar" class="w-10 h-10 object-cover rounded-full mx-4">
+                                    <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Khatab
+                                        Wedaa</a><span class="text-gray-700 text-sm font-light">Created 332 Posts</span>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <Categories :tags="this.tags"></Categories>
+
+
+
+
+
+
+                    <div class="mt-10 px-8">
+                        <h1 class="mb-4 text-xl font-bold text-gray-700">Recent Post</h1>
+                        <div class="flex flex-col bg-white px-8 py-6 max-w-sm mx-auto rounded-lg shadow-md">
+                            <div class="flex justify-center items-center">
+                                <!--                                <a href="#"-->
+                                <!--                                                                             class="px-2 py-1 bg-gray-600 text-sm text-green-100 rounded hover:bg-gray-500">Laravel</a>-->
+                            </div>
+                            <div class="mt-4"><a href="#" class="text-lg text-gray-700 font-medium hover:underline">Build
+                                Your New Idea with Laravel Freamwork.</a></div>
+                            <div class="flex justify-between items-center mt-4">
+                                <div class="flex items-center"><img
+                                    src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
+                                    alt="avatar" class="w-8 h-8 object-cover rounded-full"><a href="#"
+                                                                                              class="text-gray-700 text-sm mx-3 hover:underline">Alex
+                                    John</a></div>
+                                <span
+                                    class="font-light text-sm text-gray-600">Jun 1, 2020</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </footer>
-            <figure>
-                <img class="rounded shadow" alt="A vintage, blue, slightly rusted truck with a woooden bed overflowing with pumpkins on an gloomy overcast day. Surounding the truck are beautiful orange and white pumpkins varrying from small to large." src="https://images.unsplash.com/photo-1571030701211-aa96da577e91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80">
-                <figcaption class="italic text-lg md:text-sm">A vintage truck filled with pumpkins on a typical, gloomy Washington day.</figcaption>
-            </figure>
-            <div class="md:px-8">
-
-                <h2 style="margin-top: 0; margin-bottom: .5em">Secondary Title</h2>
-                <p>I'm baby four dollar toast taxidermy viral disrupt, 3 wolf moon raw denim tousled ethical aesthetic church-key pabst chia. Hammock vaporware street art la croix praxis coloring book bitters, bodega boys leggings art party. Non tote bag id before they sold out aute cornhole ut activated charcoal nisi in la croix unicorn roof party snackwave yr. Waistcoat bespoke labore chicharrones, celiac aliquip raw denim. Fanny pack kinfolk coloring book actually pug, bespoke street art aute minim nulla squid scenester tousled cred umami. Aliqua stumptown yr roof party gatekeep DSA. Tote bag squid lo-fi venmo laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. </p>
-                <p><b>Lorem ipsum dolor sit amet, consectetur adipiscing elit</b>. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit</b>. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. </p>
-                <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. <i>Lorem ipsum dolor sit amet, consectetur adipiscing elit</i>. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. </p>
-                <h2>Laurem Ipsom</h2>
-                <img alt="image of a happy dog with short black hair staring up at his owner" class="rounded" src="https://picsum.photos/id/237/1200/500">
-                <p><b>Nam nec ante</b>. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. </p>
-                <p>Ut ultrices ultrices enim. Curabitur sit amet mauris. <b>Sed non quam</b>. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante. </p>
-                <section class="mb-6">
-                    <h2>More Resources</h2>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean magna nulla, semper nec bibendum nec, aliquet a augue. Integer laoreet elit vel est finibus, ac fringilla dolor mollis. Sed eget faucibus tellus. Duis rutrum ullamcorper nisi, nec faucibus nisi faucibus sed.
-                    <div class="mb-6 pb-2">
-                        <ul class="text-lg ml-2">
-                            <li><a href="#" class="text-orange-900 font-semibold ml-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-                            <li><a href="#" class="text-orange-900 font-semibold ml-2">Ipsom text</a></li>
-                            <li><a href="#" class="text-orange-900 font-semibold ml-2">Adipiscing elit.</a></li>
-                            <li><a href="#" class="text-orange-900 font-semibold ml-2">Dolor sit amet,adipiscing elit.</a></li>
-                        </ul>
-                    </div>
-                    <div class="mb-6 pb-2">
-                        <ul class="flex justify-center items-center list-none text-lg">
-                            Share Post
-                            <li><i style="font-size: 1.4em;" class="fa fa-brands fa-facebook hover:text-indigo-800 mr-2"></i></li>
-                            <li><i style="font-size: 1.4em;" class="fa fa-brands fa-instagram mr-2 hover:text-indigo-800"></i></li>
-                            <li><i style="font-size: 1.4em;" class="fa fa-brands fa-twitter hover:text-indigo-800"></i></li>
-                        </ul>
-                    </div>
-                    <ul class="list-none inline">
-                        Topics
-                        <li class="inline"><a aria-label="Articles related to pumpkins" class="no-underline bolder text-base px-2 py-1 rounded text-gray-100 bg-gradient-to-r from-orange-700 to-slate-700 hover:from-slate-700 hover:to-orange-700">Pumpkins</a> </li>
-                        <li class="inline"><a aria-label="Articles related to Washington State" href="#" class=" bolder text-base no-underline px-2 py-1 rounded text-gray-100 bg-gradient-to-r from-orange-700 to-slate-700 hover:from-slate-700 hover:to-orange-700">Washington State</a></li>
-                    </ul>
-                </section>
             </div>
-        </article>
-    </section>
+        </div>
+    </div>
+
+
 
     <Footer></Footer>
 </template>
-
 <style scoped>
 
 </style>

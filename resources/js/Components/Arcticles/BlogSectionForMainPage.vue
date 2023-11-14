@@ -1,13 +1,8 @@
 <script>
 
-import Navbar from '@/Components/Navbar.vue';
-import Footer from "@/Components/Footer.vue";
+
 export default {
     name: "BlogSection",
-    components : {
-        Navbar : Navbar,
-        Footer : Footer
-    },
     props: {
         src_img : String,
         title: String,
@@ -33,11 +28,10 @@ export default {
 </script>
 
 <template>
-    <Navbar></Navbar>
 
     <div tabindex="0" class="focus:outline-none " aria-label="card 2">
         <img tabindex="0"  id="article_img" role="img" aria-label="gaming" class="focus:outline-none w-full"
-             alt="blog_image" src="https://mountain.nsu.ru/nas_tour/Altay2016.05/photos/hi-res/IMG_33857.JPG"/>
+              alt="blog_image" src="https://mountain.nsu.ru/nas_tour/Altay2016.05/photos/hi-res/IMG_33857.JPG"/>
         <div class="py-2 px-4 w-full flex justify-between bg-indigo-50">
             <p tabindex="0"
                class="focus:outline-none  text-sm text-gray-500 font-semibold tracking-wide"></p>
@@ -49,7 +43,7 @@ export default {
                 class="focus:outline-none text-lg text-gray-900 font-semibold tracking-wider">
                 {{ this.title }}</h1>
             <p       tabindex="0"
-                     class=" mb-4 focus:outline-none text-gray-700 text-sm lg:text-base lg:leading-8 pr-4 tracking-wide mt-2">
+               class=" mb-4 focus:outline-none text-gray-700 text-sm lg:text-base lg:leading-8 pr-4 tracking-wide mt-2">
                 {{ this.short_description }}
             </p>
             <div class="flex justify-between  ">
@@ -61,15 +55,14 @@ export default {
                 </div>
 
                 <div class="flex ">
-                    <h1 class="mt-1.5 mr-2">{{ this.counter_views }}</h1>
-                    <button class="w-[40px] h-[40px] mb-0 flex  "  >
-                        <svg viewBox ="0 0 150 150" xmlns="http://www.w3.org/2000/svg"><g id="Layer_40" data-name="Layer 40"><path d="m82.815 32.255h-25.1v-18.721a6.757 6.757 0 0 0 -12.552-3.477l-17.5 29.169h-22.663a2 2 0 0 0 -2 2v50a2 2 0 0 0 2 2h66.942a14.158 14.158 0 0 0 13.449-9.693l10.873-32.619a14.177 14.177 0 0 0 -13.449-18.659zm-56.015 56.969h-10.41a2.011 2.011 0 0 0 .047-.421v-45.577h10.363zm-19.8-45.998h5.437v45.574a2.011 2.011 0 0 0 .046.421h-5.483zm85.469 6.423-10.869 32.618a10.163 10.163 0 0 1 -9.654 6.957h-41.146v-47.444l17.8-29.666a2.758 2.758 0 0 1 5.122 1.42v20.721a2 2 0 0 0 2 2h27.1a10.176 10.176 0 0 1 9.654 13.394z"/></g></svg></button>
+                <h1 class="mt-1.5 mr-2">{{ this.counter_views }}</h1>
+                <button class="w-[40px] h-[40px] mb-0 flex  "  >
+                    <svg viewBox ="0 0 150 150" xmlns="http://www.w3.org/2000/svg"><g id="Layer_40" data-name="Layer 40"><path d="m82.815 32.255h-25.1v-18.721a6.757 6.757 0 0 0 -12.552-3.477l-17.5 29.169h-22.663a2 2 0 0 0 -2 2v50a2 2 0 0 0 2 2h66.942a14.158 14.158 0 0 0 13.449-9.693l10.873-32.619a14.177 14.177 0 0 0 -13.449-18.659zm-56.015 56.969h-10.41a2.011 2.011 0 0 0 .047-.421v-45.577h10.363zm-19.8-45.998h5.437v45.574a2.011 2.011 0 0 0 .046.421h-5.483zm85.469 6.423-10.869 32.618a10.163 10.163 0 0 1 -9.654 6.957h-41.146v-47.444l17.8-29.666a2.758 2.758 0 0 1 5.122 1.42v20.721a2 2 0 0 0 2 2h27.1a10.176 10.176 0 0 1 9.654 13.394z"/></g></svg></button>
                 </div>
 
             </div>
         </div>
     </div>
-    <Footer></Footer>
 </template>
 
 <style scoped>

@@ -2,7 +2,7 @@
 import BlogContent from "@/Components/Arcticles/BlogContent.vue";
 import Navbar from '@/Components/Navbar.vue';
 import Footer from "@/Components/Footer.vue";
-import BlogContent from "@/Components/Arcticles/BlogContent.vue.vue";
+import BlogContent from "@/Components/Arcticles/BlogContent.vue";
 export default {
     name: "BlogPage",
     components: {

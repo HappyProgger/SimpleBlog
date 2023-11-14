@@ -2,26 +2,30 @@
 // import { Link } from '@inertiajs/vue3';
 export default {
     // name: "navbar"
-    props: ['choosen_page'],
+
     data(){
         return{
+            url : ''
+
+
+        }
 
     },
     methods : {
-        show_curret_page($current_page) {
-            for (var key in this.choosen_page) {
-                if (key === $current_page) {
-                        this.choosen_page[key] = true
-                }
-                this.choosen_page[key] = false
-                console.log(this.choosen_page)
-            }
+        get_url(){
+            this.url = window.location.pathname+window.location.search
         }
+        },
+    mounted() {
+        this.get_url()
     }
+
+
 }
 </script>
 
 <template>
+
     <!-- Main navigation container -->
     <nav class="bg-white px-6 py-4 shadow">
         <div class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between">
@@ -40,13 +44,15 @@ export default {
             </div>
             <div class="md:flex flex-col md:flex-row md:-mx-4 hidden">
                 <a href="/" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0 "
-                   :class="{ 'font-bold':  choosen_page['main_page'] }"
-                    @click="show_curret_page('main_page')"
+                   :class="{ 'text-red-600':  this.$store.state.choosen_page['/'] }"
+                    @click="this.$store.commit('show_curret_page',this.url)"
                     > Home</a>
                 <a href="/articles"
                    class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
-                   :class="{ 'text-red-600':  choosen_page['blogs_page'] }"
-                   @click="show_curret_page('blogs_page')"
+                   :class="{ 'text-red-600':  this.$store.state.choosen_page['/articles'] }"
+
+                   @click="this.$store.commit('show_curret_page',this.url)"
+
                     >Blog</a>
             </div>
         </div>
