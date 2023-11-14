@@ -32,10 +32,7 @@ export default {
         convert_date($row_date) {
             return new Date($row_date).toISOString().replace('T', ' ').slice(0, -5)
         },
-        open_post($id) {
-            window.location = window.location.origin + "/articles/" + $id
-            // window.location = window.location.origin+ "/"
-        }
+
     },
     computed() {
 
@@ -46,15 +43,8 @@ export default {
 </script>
 
 <template>
-    {{ }}
-    {{ this.last_page + 1 }}
-    {{ this.$inertia.page.props.articles.links[this.last_page].url }}
-    <!--{{ articles.last_page}}-->
-    <!--{{ articles.links}}-->
-    <!--{{ this.$inertia.page.props.articles.links[0] }}-->
-    <Navbar></Navbar>
-    <!--    { {{ this.current_page}}}-->
 
+    <Navbar></Navbar>
     <div class="bg-gray-100 overflow-x-hidden">
 
 
@@ -74,8 +64,10 @@ export default {
 
                     <div v-for="article in this.articles">
                         <BlogSectionForBlogsPage
-                            @click="this.open_post(article.id)"
+
+                            :id ="article.id"
                             :date="convert_date(article.created_at)"
+                            :tags="article.tags"
                             :src_img="article.image"
                             :title="article.title"
                             :short_description="article.text"

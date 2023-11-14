@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IncrementCounterLikesBlog;
 use App\Models\Article;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -24,13 +25,20 @@ class ArticleController extends Controller
 }
     public function show($id)
     {
+        Article::add_view_article($id);
+
         return Inertia::render('BlogPage', [
-            'article' => Article::findOrFail($id),
+            'article' => Article::get_article($id),
             'tags' => Tag::show_all_tags(),
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
         ]);
+    }
+    public function increment_count_likes($id)
+    {
+        $count_likes = Article::increment_likes_of_article($id);
+        return response()->json(['likes' => $count_likes]);
     }
 }

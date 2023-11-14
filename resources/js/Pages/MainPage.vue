@@ -3,11 +3,13 @@
 import Navbar from '@/Components/Navbar.vue';
 import Footer from "@/Components/Footer.vue";
 import BlogSection from "@/Components/Arcticles/BlogSectionForMainPage.vue";
+import BlogSectionForBlogsPage from "@/Components/Arcticles/BlogSectionForBlogsPage.vue";
 
 export default {
 
     // name: "MainPage",
     components: {
+        BlogSectionForBlogsPage,
         Navbar: Navbar,
         Footer: Footer,
         BlogSection: BlogSection,
@@ -53,8 +55,10 @@ export default {
 
 
                             <BlogSection
+                            :id="article.id"
                             :date="convert_date(article.created_at)"
                             :src_img="article.image"
+                            :tags="article.tags"
                             :title="article.title"
                             :short_description="article.text.slice(0,100)+ '...'"
                             :counter_views="article.counter_views"

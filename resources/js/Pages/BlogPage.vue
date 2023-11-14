@@ -24,24 +24,44 @@ export default {
     data() {
         return {
             article: this.$inertia.page.props.article,
-            tags: this.$inertia.page.props.tags
+            article_tags: this.$inertia.page.props.article[0].tags,
+            tags: this.$inertia.page.props.tags,
+            count_likes: this.$inertia.page.props.article[0].counter_likes,
+            count_views : this.$inertia.page.props.article[0].counter_views,
         }
     },
 
     methods: {
+        get_title_tags($tags_object){
+            return $tags_object.map( tag => tag.title)
+        },
+        like_article(){
+            let url = window.location.origin + '/api/increment_counter_like_article/' + this.article[0].id
+            axios.get(url).then(res => this.count_likes = res.data.likes)
+        }
+
 
     },
+    watch : {
+
+    },
+    created(){
+        this.article_tags = this.get_title_tags(this.$inertia.page.props.article[0].tags)
+    }
 
 
 }
 </script>
 
 <template>
+
+
     <Navbar></Navbar>
     <div class="bg-gray-100 overflow-x-hidden">
 
 
         <div class="px-6 py-8">
+
             <div class="flex justify-between container mx-auto">
                 <div class="w-full lg:w-8/12">
                     <div class="flex items-center justify-between">
@@ -62,11 +82,20 @@ export default {
                              class="focus:outline-none w-full"
                              alt="blog_image"
                              src="https://mountain.nsu.ru/nas_tour/Altay2016.05/photos/hi-res/IMG_33857.JPG"/>
+                        <div class="flex">
+
+                        </div>
                         <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
+                            <div  class="flex">
+                            <div v-for="(tag,key) in this.article_tags ">
+                                <span class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ tag }}</span>
+
+                            </div>
+                            </div>
                             <div class="mt-2"><a href="#" class="text-2xl text-gray-700 font-bold hover:underline">{{
-                                    this.article.title
+                                    this.article[0].title
                                 }}</a>
-                                <p class="mt-2 text-gray-600">{{ this.article.text }}</p>
+                                <p class="mt-2 text-gray-600">{{ this.article[0].text }}</p>
                             </div>
                             <div class="flex justify-end items-center mt-4">
 
@@ -78,7 +107,8 @@ export default {
                             </div>
                             <div class="flex sm:justify-start  ">
                                 <div class="flex ">
-                                    <button class="w-[40px] h-[40px] self-center">
+                                    <button class="w-[40px] h-[40px] self-center"
+                                    >
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                              xmlns:xlink="http://www.w3.org/1999/xlink"
                                              x="0px" y="0px" viewBox="0 0 600 600"
@@ -87,12 +117,15 @@ export default {
                                             d="M245.003,175.583c-38.281,0-69.422,31.141-69.422,69.415c0,38.274,31.141,69.415,69.422,69.415 c38.274,0,69.415-31.141,69.415-69.415C314.417,206.724,283.277,175.583,245.003,175.583z M245.003,299.1 c-29.833,0-54.11-24.27-54.11-54.102c0-29.832,24.277-54.102,54.11-54.102s54.102,24.27,54.102,54.102 C299.105,274.83,274.835,299.1,245.003,299.1z"/><path
                                             d="M245.003,206.679c-21.13,0-38.326,17.189-38.326,38.319c0,21.129,17.197,38.326,38.326,38.326s38.319-17.197,38.319-38.326 C283.321,223.868,266.132,206.679,245.003,206.679z M245.003,268.011c-12.688,0-23.014-10.326-23.014-23.014 c0-12.688,10.325-23.006,23.014-23.006c12.688,0,23.006,10.318,23.006,23.006C268.009,257.686,257.691,268.011,245.003,268.011z"/></g></svg>
                                     </button>
-                                    <h1 class="mt-1.5">{{ this.article.counter_views }}</h1>
+                                    <h1 class="mt-1.5">{{ count_views }}</h1>
                                 </div>
 
                                 <div class="flex ml-4 ">
 
-                                    <button class="w-[40px] h-[40px] mb-0 flex  ">
+                                    <button
+                                        @click="like_article()"
+
+                                        class="w-[40px] h-[40px] mb-0 flex  ">
                                         <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
                                             <g id="Layer_40" data-name="Layer 40">
                                                 <path
@@ -100,13 +133,13 @@ export default {
                                             </g>
                                         </svg>
                                     </button>
-                                    <h1 class="mt-1.5 mr-2">{{ this.article.counter_views }}</h1>
+                                    <h1 class="mt-1.5 mr-2">{{ count_likes }}</h1>
                                 </div>
                             </div>
 
 
 
-                            <BlogComment></BlogComment>
+                            <BlogComment :article_id="this.article[0].id"></BlogComment>
                         </div>
                     </div>
 
