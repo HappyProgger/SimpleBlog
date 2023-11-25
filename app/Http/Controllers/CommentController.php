@@ -11,6 +11,7 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request,$id)
     {
         $data = array_merge($request->all(),['article_id' => $id]);
+        sleep(600);
         if (Comment::insert($data)){
             return response()->json(['status' => 'success']);
         }else{
